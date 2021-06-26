@@ -1,0 +1,38 @@
+.clsFieldset {    
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-top: 0.25em;
+    padding-bottom: 0.425em;
+    padding-left: 0.55em;
+    padding-right: 0.55em;
+    border: 1px solid #dddbda;
+    border-radius: 15px;
+    display: block;
+    overflow-y: auto;
+    min-width: 100%;    
+ }
+ 
+ .badgeStyle{
+    cursor: pointer;
+    font-weight:500;
+    font-style: italic;
+    font-size: 13px;
+ }
+
+.clsLegend {    
+    padding-left: 2px;
+    padding-right: 2px;
+    border: none;
+    display: block;
+    font-style: italic;
+ }
+
+ .clsPill {
+    color : #fff3f3;
+    font-style: italic;
+    background-color: coral;
+    font-weight:500;
+    font-size: 13px;
+ }
+
+
