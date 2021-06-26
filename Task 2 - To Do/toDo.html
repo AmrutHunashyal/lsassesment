@@ -1,0 +1,88 @@
+<template>
+	<lightning-card icon-name="standard:task" title="List of To Do items">
+		<lightning-button label="New" variant="brand" slot="actions" onclick={newTask}></lightning-button>
+		<div class="slds-var-p-around_medium lgc-bg">
+			<ul class="slds-has-dividers_bottom-space">
+				<div class="slds-grid slds-grid_vertical">
+					<div class="slds-scrollable slds-grow">
+						<div class="slds-scrollable_none">
+							<table aria-multiselectable="true" class="slds-table slds-table_bordered slds-table_fixed-layout" role="grid">
+								<thead>
+									<tr class="slds-line-height_reset">
+										<th class="" scope="col" style="width:5.75rem">
+											<div style="padding-left:1rem;position:relative">
+												<lightning-helptext content="Edit or Delete To Do Items.."></lightning-helptext>
+											</div>
+											<div class="slds-resizable">
+												<input type="range" class="slds-resizable__input slds-assistive-text" max="1000" min="20" tabindex="-1" /> <span class="slds-resizable__handle">
+                                                        <span class="slds-resizable__divider"></span> </span>
+											</div>
+										</th>
+										<th aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+											<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate"> <span class="slds-truncate">Name - Status</span> </div>
+											<div class="slds-resizable">
+												<input type="range" class="slds-resizable__input slds-assistive-text" max="1000" min="20" tabindex="-1" /> <span class="slds-resizable__handle">
+                                                        <span class="slds-resizable__divider"></span> </span>
+											</div>
+										</th>
+										<th aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+											<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate"> <span class="slds-truncate">Contact</span> </div>
+											<div class="slds-resizable">
+												<input type="range" class="slds-resizable__input slds-assistive-text" max="1000" min="20" tabindex="-1" /> <span class="slds-resizable__handle">
+                                                        <span class="slds-resizable__divider"></span> </span>
+											</div>
+										</th>
+										<th aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+											<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate"> <span class="slds-truncate">Actions</span> </div>
+											<div class="slds-resizable">
+												<input type="range" class="slds-resizable__input slds-assistive-text" max="1000" min="20" tabindex="-1" /> <span class="slds-resizable__handle">
+                                                        <span class="slds-resizable__divider"></span> </span>
+											</div>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<template for:each={toDoList} for:item="val">
+										<tr key={val.Name} aria-selected="false" class="slds-hint-parent" style="line-height: 48px;">
+											<td class="slds-text-align_right" role="gridcell" tabindex="0">
+												<div class="slds-truncate" title={val.Name}>
+													<lightning-button-icon value={val.Id} icon-name="utility:edit" onclick={handleEditRecord} alternative-text="edit" class="slds-float_right slds-var-m-left_xx-small" title="Edit"> </lightning-button-icon>
+													<lightning-button-icon value={val.Id} name={val.Name} icon-name="utility:delete" onclick={handleDeleteRecord} alternative-text="Delete" class="slds-float_right slds-var-m-left_xx-small" title="Delete"> </lightning-button-icon>
+												</div>
+											</td>
+											<td role="gridcell">
+												<h1 style="font-size: 13px;font-family: verdana;" class="slds-truncate" title={val.Name}>
+                                                    <a data-value={val.Id} onclick={goToRecord}>{val.Name}</a>
+													<span key={val.Name} class="slds-badge slds-theme_error slds-var-m-around_small" style="font-size: 10px;font-weight: 400;
+                                                            padding-left: 10px;padding-right: 10px;position:relative;font-family: verdana;">
+                                                    {val.Status__c}
+                                                </span> 
+                                                </h1> </td>
+											<td role="gridcell">
+												<h1 style="font-size: 13px;font-family: verdana;" class="slds-truncate" title={val.Contact__r.Name}>
+                                                    <a data-value={val.Contact__c} onclick={goToContact}>{val.Contact__r.Name}</a>
+                                                </h1> </td>
+											<td role="gridcell">
+												<div style="font-size: 13px;font-family: verdana;" class="slds-truncate" title={val.Actions__c}>{val.Actions__c}</div>
+											</td>
+										</tr>
+									</template>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</ul>
+		</div>
+	</lightning-card>
+
+	<!-- NEW TO DO -->
+	<template if:true={openNewToDo}>
+		<c-new-to-do oncreation={goToNewItem} onclosemodal={closeModal}></c-new-to-do>
+	</template>
+
+	<!-- EDIT TO DO -->
+	<template if:true={openEditToDo}>
+		<c-edit-to-do record-id-to-be-edited={recordIdToBeEdited} onedit={handleEdit} onclosemodal={closeModal}></c-edit-to-do>
+	</template>
+</template>
