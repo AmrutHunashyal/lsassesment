@@ -1,0 +1,35 @@
+<template>
+    <lightning-record-edit-form object-api-name="To_Do__c" onload={handleOnLoad} onsuccess={handleSuccess}>
+        <lightning-messages></lightning-messages>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container">
+                <header class="bckcol slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closepopup}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small"></lightning-icon> <span class="slds-assistive-text">Close</span> </button>
+                    <h2 class="slds-text-heading_medium slds-hyphenate header-string">
+                        New To Do Item
+                    </h2> </header>
+                <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+                    <template if:true={loading}>
+                        <lightning-spinner variant="brand" alternative-text="Loading"></lightning-spinner>
+                    </template>
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item size="12" flexibility="auto" large-device-size="12" small-device-size="12">
+                            <div class="slds-var-m-around_medium">
+                                <lightning-input-field field-name="Name" required></lightning-input-field>
+                                <lightning-input-field field-name="Contact__c" required></lightning-input-field>
+                                <lightning-input-field field-name="Status__c" required></lightning-input-field>
+                                <lightning-input-field field-name="Actions__c" required></lightning-input-field>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button class="slds-var-m-top_small slds-var-m-around_small" onclick={closepopup} label="Cancel"> </lightning-button>
+                    <lightning-button class="slds-var-m-top_small" type="submit" variant="brand" label="Save"> </lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </lightning-record-edit-form>
+</template>
