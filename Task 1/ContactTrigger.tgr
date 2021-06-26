@@ -1,0 +1,14 @@
+trigger ContactTrigger on Contact (After Update,After Delete,After Undelete) {
+    if(Trigger.isUpdate){
+        AccountTotalContactsUpdater2.onUpdate(Trigger.New,Trigger.oldMap);
+        //AccountTotalContactsUpdater.onTest(Trigger.New,Trigger.oldMap);
+    }
+    
+    if(Trigger.isDelete){
+        AccountTotalContactsUpdater2.onDelete(Trigger.Old);
+    }
+    
+    if(Trigger.isUndelete){
+        AccountTotalContactsUpdater2.onUndelete(Trigger.New);
+    }
+}
